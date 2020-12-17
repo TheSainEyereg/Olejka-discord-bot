@@ -1,0 +1,28 @@
+{
+  "name": "olejka-discord-bot",
+  "version": "1.0.0",
+  "description": "My own discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheSainEyereg/olejka-discord-bot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "Olejka",
+    "Test"
+  ],
+  "author": "https://olejka.pw/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheSainEyereg/olejka-discord-bot/issues"
+  },
+  "homepage": "https://github.com/TheSainEyereg/olejka-discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
