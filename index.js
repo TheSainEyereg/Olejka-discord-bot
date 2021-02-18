@@ -9,7 +9,7 @@ const cmds = config.cmdDir
 const bot = new Discord.Client();
 
 bot.on("ready", _ => {
-    bot.user.setActivity(`Bot prefix ${prefix} type help for help`);
+    bot.user.setActivity(`Bot prefix ${prefix} type ${prefix}help for help`);
     console.log(`${bot.user.username} started`);
 });
 
