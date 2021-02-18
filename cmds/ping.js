@@ -3,6 +3,6 @@ module.exports = {
 	description: 'Ping!',
 	execute(message, args) {
         const timeTaken = Date.now() - message.createdTimestamp;
-        message.reply(`Pong! Got answer after ${timeTaken}ms.`);
-	},
+        message.channel.send(`Pong! Got answer after ${timeTaken}ms.`);
+	}
 };
