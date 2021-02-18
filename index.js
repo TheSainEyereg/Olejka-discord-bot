@@ -32,8 +32,8 @@ bot.on('message', message => {
 	try {
 		bot.commands.get(command).execute(message, args);
 	} catch (error) {
+		message.channel.send('No command found or error occured!');
 		console.error(error);
-		message.reply('No command found or error occured!');
 	}
 
 })
