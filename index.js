@@ -9,6 +9,7 @@ const cmds = config.cmdDir
 const bot = new Discord.Client();
 
 bot.on("ready", _ => {
+    bot.user.setActivity(`Bot prefix ${prefix} type help for help`);
     console.log(`${bot.user.username} started`);
 });
 
@@ -32,7 +33,7 @@ bot.on('message', message => {
 		bot.commands.get(command).execute(message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply('No cammand found or error occured!');
+		message.reply('No command found or error occured!');
 	}
 
 })
