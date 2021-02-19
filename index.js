@@ -25,7 +25,7 @@ for (const folder of commandFolder) {
 }
 
 bot.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot || message.channel.type === 'dm') return;
 
     const body = message.content.slice(prefix.length);
     const args = body.split(' ');
