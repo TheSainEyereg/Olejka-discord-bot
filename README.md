@@ -15,7 +15,9 @@ npm i
 {
     "token": "YOUR_BOT_TOKEN",
     "prefix": "o!",
-    "cmddir": "cmds"
+    "cmddir": "cmds",
+    "cooldown": 5,
+    "logs": "bot-logs"
 }
 ```
 3. Run bot by typing `node index.js`
