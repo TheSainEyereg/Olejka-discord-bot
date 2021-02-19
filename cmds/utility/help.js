@@ -1,11 +1,11 @@
+const fs = require('fs')
+const config = require('../../config.json')
+
 module.exports = {
 	name: 'help',
 	description: 'Displays list of commands',
 	arguments: '(category)',
 	execute(message, args) {
-		const fs = require('fs')
-		const config = require('../../config.json')
-		
 		const out = []
 		if (!args[0]) {
 			out.push(`Here is my commands categories:`)

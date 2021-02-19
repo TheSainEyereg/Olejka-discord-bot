@@ -1,13 +1,13 @@
+const fs = require('fs')
+const config = require('../../config.json')
+
 module.exports = {
 	name: 'helpdm',
 	description: 'Displays list of commands in DM',
 	arguments: '(category)',
 	canDM: true,
 	execute(message, args) {
-		const fs = require('fs')
-		const config = require('../../config.json')
-		
-		const out = []
+const out = []
 		if (!args[0]) {
 			out.push(`Here is my commands categories:`)
 			const cmds = fs.readdirSync(`./${config.cmddir}`)
