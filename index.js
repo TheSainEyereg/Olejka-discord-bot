@@ -4,21 +4,24 @@ const fs = require('fs')
 const config = require("./config.json");
 const token = config.token
 const prefix = config.prefix
-const cmds = config.cmdDir
+const cmds = config.cmddir
 
 const bot = new Discord.Client();
 
 bot.on("ready", _ => {
-    bot.user.setActivity(`Bot prefix ${prefix} type ${prefix}help for help`);
+    bot.user.setActivity(`Prefix ${prefix} type ${prefix}help for help`);
     console.log(`${bot.user.username} started`);
 });
 
 bot.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync(`./${cmds}`).filter(file => file.endsWith('.js'));
+const commandFolder = fs.readdirSync(`./${cmds}`);
 
-for (const file of commandFiles) {
-	const command = require(`./${cmds}/${file}`);
-	bot.commands.set(command.name, command);
+for (const folder of commandFolder) {
+	const commandFile = fs.readdirSync(`./${cmds}/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFile) {
+		const command = require(`./${cmds}/${folder}/${file}`);
+		bot.commands.set(command.name, command);
+	}
 }
 
 bot.on('message', message => {
@@ -28,12 +31,12 @@ bot.on('message', message => {
     const args = body.split(' ');
     const command = args.shift().toLowerCase();
 
-    if (!bot.commands.has(command)) return;
+    if (!bot.commands.has(command)) {message.channel.send(`No command found\nType ${prefix}help for help`); return}
 	try {
 		bot.commands.get(command).execute(message, args);
 	} catch (error) {
-		message.channel.send('No command found or error occured!');
-		console.error(error);
+		message.channel.send(`Error occured!\n\`\`\`${error}\`\`\``);
+		console.error(error)
 	}
 
 })

@@ -1,6 +1,6 @@
 module.exports = {
-	name: ,
-	description: ,
+	name: 'mute',
+	description: 'Mutes member on server',
 	execute(message, args) {
         
 	}
