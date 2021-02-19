@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'help',
 	description: 'Displays list of commands',
+	arguments: '(category)',
 	execute(message, args) {
 		message.channel.send(`
 		List of commands:
