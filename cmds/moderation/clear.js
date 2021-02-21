@@ -3,7 +3,7 @@ module.exports = {
     description: 'Clears messages count',
 	arguments: '[count]',
     execute(message, args) {
-        if (!mess.member.hasPermission('MANAGE_MESSAGES')) return mess.channel.send('You have no permission to remove messages');
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return mess.channel.send('You have no permission to remove messages');
         const amount = args[0]
         if (!amount)
             return message.channel.send('No amount given')
