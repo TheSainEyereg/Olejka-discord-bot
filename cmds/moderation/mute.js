@@ -41,7 +41,7 @@ module.exports = {
 
         let muteEmbed = new Discord.MessageEmbed()
             .setDescription('~Mute~')
-            .setColor('#e56b00')
+            .setColor('#fab132')
             .addField('Muted User', `${toMute} with ID ${toMute.id}`)
             .addField('Muted By', `<@${message.author.id}> with ID ${message.author.id}`)
             .addField('Muted In', `${message.channel}`)

@@ -16,7 +16,7 @@ module.exports = {
 
         let kickEmbed = new Discord.MessageEmbed()
             .setDescription('~Kick~')
-            .setColor('#e56b00')
+            .setColor('#f0fa32')
             .addField('Kicked User', `${kUser} with ID ${kUser.id}`)
             .addField('Kicked By', `<@${message.author.id}> with ID ${message.author.id}`)
             .addField('Kicked In', `${message.channel}`)

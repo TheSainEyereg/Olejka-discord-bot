@@ -16,7 +16,7 @@ module.exports = {
 
         let banEmbed = new Discord.MessageEmbed()
             .setDescription('~Ban~')
-            .setColor('#bc0000')
+            .setColor('#fa3232')
             .addField('Banned User', `${bUser} with ID ${bUser.id}`)
             .addField('Banned By',`<@${message.author.id}> with ID ${message.author.id}` )
             .addField('Banned In', message.channel)
