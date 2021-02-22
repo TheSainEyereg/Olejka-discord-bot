@@ -1,9 +1,10 @@
 const ms = require('ms');
+const logs = require('../../config.json').logs
 
 module.exports = {
 	name: 'mute',
 	description: 'Mutes member on server',
-	arguments: '[user] (duration) (reason)',
+	arguments: '[user] (duration (mins)) (reason)',
 	async execute(message, args) {
 		if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You do not have permissions to use this command');
 
@@ -28,16 +29,36 @@ module.exports = {
             console.log(e.stack);
           }
         }
-        let mutetime = args[1];
-        if(!mutetime) return message.channel.send('You didn\'t specify a time!');
+        
+        let mutetime = args[1]
+        let reason = args[2]
+        if (!parseInt(mutetime)) {mutetime = 'Permanent'; reason = args[1]}
 
+	  
+        let muteEmbed = new Discord.RichEmbed()
+        .setDescription('~Mute~')
+        .setColor('#e56b00')
+        .addField('Muted User', `${tomute} with ID ${tomute.id}`)
+        .addField('Muted By', `<@${message.author.id}> with ID ${message.author.id}`)
+        .addField('Muted In', `${message.channel}`)
+        .addField('Muted For', `${mutetime}`)
+        .addField('Tiime', `${message.createdAt}`)
+        .addField('Reason', reason);
+        
+        
+        let muteChannel = message.guild.channels.find(`name`, logs);
+        if(muteChannel) muteChannel.send(muteEmbed);
+        
         await(tomute.addRole(muterole.id));
-        message.channel.send(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
+        message.channel.send(`<@${tomute.id}> has been muted for ${mutetime}`);
 
-        setTimeout(() => {
-          tomute.removeRole(muterole.id);
-          message.channel.send(`<@${tomute.id}> has been unmuted!`);
-        }, ms(mutetime));
+        if (parseInt(mutetime)) {
+          setTimeout(() => {
+            tomute.removeRole(muterole.id);
+            message.channel.send(`<@${tomute.id}> has been unmuted!`);
+          }, ms(mutetime));
+        }
+        
         
 	}
 };
