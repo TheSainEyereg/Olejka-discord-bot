@@ -37,7 +37,7 @@ module.exports = {
 
         let mutetime = args[1];
         let reason = args[2];
-        if (!parseInt(mutetime)) { mutetime = 'Permanent'; reason = args[1];}
+        if (!parseInt(mutetime)) { mutetime = 'Permanent'; reason = args[1]}
 
         let muteEmbed = new Discord.MessageEmbed()
             .setDescription('~Mute~')
@@ -45,7 +45,7 @@ module.exports = {
             .addField('Muted User', `${toMute} with ID ${toMute.id}`)
             .addField('Muted By', `<@${message.author.id}> with ID ${message.author.id}`)
             .addField('Muted In', `${message.channel}`)
-            .addField('Muted For', `${mutetime}`)
+            .addField('Muted For', `${mutetime} min`)
             .addField('Tiime', `${message.createdAt}`)
             .addField('Reason', reason);
 
@@ -53,13 +53,14 @@ module.exports = {
         if (muteChannel) muteChannel.send(muteEmbed);
 
         await toMute.roles.add(muterole.id);
-        message.channel.send(`<@${toMute.id}> has been muted for ${mutetime}`);
-
         if (parseInt(mutetime)) {
+            message.channel.send(`<@${toMute.id}> has been muted for ${mutetime} min`);    
             setTimeout(() => {
                 toMute.roles.remove(muterole);
                 message.channel.send(`<@${toMute.id}> has been unmuted!`);
-            }, ms(mutetime));
-        }
+            }, ms(mutetime)*1000*60);
+        } else {
+            message.channel.send(`<@${toMute.id}> has been muted for permanent`);
+        }    
     },
 };
