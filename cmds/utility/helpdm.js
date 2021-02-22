@@ -4,7 +4,7 @@ const config = require('../../config.json')
 module.exports = {
 	name: 'helpdm',
 	description: 'Displays list of commands in DM',
-	arguments: '(category)',
+	arguments: '',
 	canDM: true,
 	execute(message, args) {
 const out = []
