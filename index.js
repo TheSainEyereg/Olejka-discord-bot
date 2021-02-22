@@ -10,10 +10,11 @@ const bot = new Discord.Client();
 
 bot.on("ready", _ => {
     bot.user.setActivity(`Prefix ${prefix} type ${prefix}help for help`);
-    console.log(`${bot.user.username} started`);
+    console.log(`${bot.user.username} started \nBot is working on ${bot.guilds.cache.size} servers!`);
 });
 
 bot.commands = new Discord.Collection();
+bot.queue = new Map() //For music
 const commandFolder = fs.readdirSync(`./${cmds}`);
 
 for (const folder of commandFolder) {
