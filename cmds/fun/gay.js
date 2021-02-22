@@ -17,7 +17,6 @@ module.exports = {
 		ctx.drawImage(avatar, 0, 0, canvas.width, canvas.height);
 		ctx.globalAlpha = 0.6
 		ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-		ctx.globalAlpha = 1
 
 		const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'gay.png');
 		message.channel.send(attachment);
