@@ -4,9 +4,8 @@ module.exports = {
 	arguments: '[count]',
     execute(message, args) {
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return mess.channel.send('You have no permission to remove messages');
-        const amount = args[0]
-        if (!amount)
-            return message.channel.send('No amount given')
+        if (!args[0]) return message.channel.send('No amount given')
+        const amount = parseInt(args[0])+1 //For command message
         if (isNaN(amount)) return message.channel.send('That is not a number -_-')
         if (amount > 100)
             return message.channel.send('Looks like you are going to remove too many messages O_O');
@@ -19,7 +18,11 @@ module.exports = {
                 })
                 .then((messages) => {
                     message.channel.bulkDelete(messages);
-                    message.channel.send(`Deleted ${amount} messages!`);
+                    message.channel.send(`Deleted ${amount-1} messages!`) //For command message
+                    .then(msg => {
+                        msg.delete({timeout: 3000})
+                    })
+                    .catch(/*e => {messgae.channel.send('Error when deleting message')}*/);
                 });
         }
         delete_messages();
