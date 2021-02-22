@@ -57,7 +57,7 @@ module.exports = {
 
         if (parseInt(mutetime)) {
             setTimeout(() => {
-                toMute.removeRole(muterole.id);
+                toMute.roles.remove(muterole);
                 message.channel.send(`<@${toMute.id}> has been unmuted!`);
             }, ms(mutetime));
         }
