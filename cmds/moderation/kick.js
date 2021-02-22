@@ -7,7 +7,7 @@ module.exports = {
     execute(message, args) {
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
         if (!kUser) return message.channel.send("Can't find user!");
-        let kReason = args[1];
+        let kickReason = args[1];
         if (!message.member.hasPermission("MANAGE_MESSAGES"))
             return message.channel.send("You have no permissions to ban/kick!");
         if (kUser.hasPermission("MANAGE_MESSAGES"))
@@ -20,11 +20,11 @@ module.exports = {
             .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
             .addField("Kicked In", `${message.channel}`)
             .addField("Tiime", `${message.createdAt}`)
-            .addField("Reason", kReason);
+            .addField("Reason", kickReason);
 
         let kickChannel = message.guild.channels.find(`name`, logs);
         if (kickChannel) kickChannel.send(kickEmbed);
 
-        message.guild.member(kUser).kick(kReason);
+        message.guild.member(kUser).kick(kickReason);
     },
 };
