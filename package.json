@@ -24,6 +24,7 @@
   "homepage": "https://github.com/TheSainEyereg/olejka-discord-bot#readme",
   "dependencies": {
     "@discordjs/opus": "^0.4.0",
+    "canvas": "^2.6.1",
     "discord.js": "^12.5.1",
     "ms": "^2.1.3"
   }
