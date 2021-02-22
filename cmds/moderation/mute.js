@@ -1,28 +1,31 @@
-const ms = require("ms");
-const logs = require("../../config.json").logs;
+const Discord = require('discord.js');
+const ms = require('ms');
+const logs = require('../../config.json').logs;
 
 module.exports = {
-    name: "mute",
-    description: "Mutes member on server",
-    arguments: "[user] (duration (mins)) (reason)",
+    name: 'mute',
+    description: 'Mutes member on server',
+    arguments: '[user] (duration (mins)) (reason)',
     async execute(message, args) {
-        if (!message.member.hasPermission("MANAGE_MESSAGES"))
-            return message.channel.send("You do not have permissions to use this command");
+        if (!message.member.hasPermission('MANAGE_MESSAGES'))
+            return message.channel.send('You do not have permissions to use this command');
 
-        let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
-        if (!tomute) return message.channel.send("Couldn't find user.");
-        if (tomute.hasPermission("MANAGE_MESSAGES"))
-            return message.channel.send("Can't mute them!");
-        let muterole = message.guild.roles.find(`name`, "Muted");
+        let toMute = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
+        if (!toMute) return message.channel.send('Couldn\'t find user.');
+        if (toMute.hasPermission('MANAGE_MESSAGES'))
+            return message.channel.send('Can\'t mute them!');
+        let muterole = message.guild.roles.cache.find(r => r.name === 'Muted')
         if (!muterole) {
             try {
-                muterole = await message.guild.createRole({
-                    name: "Muted",
-                    color: "#000000",
-                    permissions: [],
+                muterole = await message.guild.roles.create({
+                        data: {
+                            name: 'Muted',
+                            color: '#000000',
+                            permissions: []
+                        }
                 });
-                message.guild.channels.forEach(async (channel, id) => {
-                    await channel.overwritePermissions(muterole, {
+                message.guild.channels.cache.forEach(async (channel, id) => {
+                    await channel.updateOverwrite(muterole, {
                         SEND_MESSAGES: false,
                         ADD_REACTIONS: false,
                     });
@@ -34,28 +37,28 @@ module.exports = {
 
         let mutetime = args[1];
         let reason = args[2];
-        if (!parseInt(mutetime)) { mutetime = "Permanent"; reason = args[1];}
+        if (!parseInt(mutetime)) { mutetime = 'Permanent'; reason = args[1];}
 
-        let muteEmbed = new Discord.RichEmbed()
-            .setDescription("~Mute~")
-            .setColor("#e56b00")
-            .addField("Muted User", `${tomute} with ID ${tomute.id}`)
-            .addField("Muted By", `<@${message.author.id}> with ID ${message.author.id}`)
-            .addField("Muted In", `${message.channel}`)
-            .addField("Muted For", `${mutetime}`)
-            .addField("Tiime", `${message.createdAt}`)
-            .addField("Reason", reason);
+        let muteEmbed = new Discord.MessageEmbed()
+            .setDescription('~Mute~')
+            .setColor('#e56b00')
+            .addField('Muted User', `${toMute} with ID ${toMute.id}`)
+            .addField('Muted By', `<@${message.author.id}> with ID ${message.author.id}`)
+            .addField('Muted In', `${message.channel}`)
+            .addField('Muted For', `${mutetime}`)
+            .addField('Tiime', `${message.createdAt}`)
+            .addField('Reason', reason);
 
-        let muteChannel = message.guild.channels.find(`name`, logs);
+        let muteChannel = message.guild.channels.cache.find(c => c.name === logs);
         if (muteChannel) muteChannel.send(muteEmbed);
 
-        await tomute.addRole(muterole.id);
-        message.channel.send(`<@${tomute.id}> has been muted for ${mutetime}`);
+        await toMute.roles.add(muterole.id);
+        message.channel.send(`<@${toMute.id}> has been muted for ${mutetime}`);
 
         if (parseInt(mutetime)) {
             setTimeout(() => {
-                tomute.removeRole(muterole.id);
-                message.channel.send(`<@${tomute.id}> has been unmuted!`);
+                toMute.removeRole(muterole.id);
+                message.channel.send(`<@${toMute.id}> has been unmuted!`);
             }, ms(mutetime));
         }
     },
