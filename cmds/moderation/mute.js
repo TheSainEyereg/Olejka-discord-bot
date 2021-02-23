@@ -7,13 +7,12 @@ module.exports = {
     description: 'Mutes member on server',
     arguments: '[user] (duration (mins)) (reason)',
     async execute(message, args) {
-        if (!message.member.hasPermission('MANAGE_MESSAGES'))
+        if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.hasPermission('MANAGE_MESSAGES'))
             return message.channel.send('You do not have permissions to use this command');
 
         let toMute = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
         if (!toMute) return message.channel.send('Couldn\'t find user.');
-        if (toMute.hasPermission('MANAGE_MESSAGES'))
-            return message.channel.send('Can\'t mute them!');
+        //if (toMute.hasPermission('MANAGE_MESSAGES')) return message.channel.send('Can\'t mute them!');
         let muterole = message.guild.roles.cache.find(r => r.name === 'Muted')
         if (!muterole) {
             try {
@@ -28,6 +27,7 @@ module.exports = {
                     await channel.updateOverwrite(muterole, {
                         SEND_MESSAGES: false,
                         ADD_REACTIONS: false,
+                        SPEAK: false
                     });
                 });
             } catch (e) {

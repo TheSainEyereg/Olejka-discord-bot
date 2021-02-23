@@ -14,10 +14,11 @@ module.exports = {
 		if (!permissions.has('SPEAK')) return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 
 		const serverQueue = message.client.queue.get(message.guild.id);
+		let songInfo
 		try {
-			const songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, '$1')).error()
+			songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, '$1'))
 		} catch(e) {
-			return message.channel.send(`Cant find youtube song url "${args[0]}"! \nMake sure you using correct format: \`\`\`\n${prefix}play https://www.youtube.com/watch?v=dQw4w9WgXcQ \n${prefix}play https://youtu.be/dQw4w9WgXcQ\`\`\``);
+			return message.channel.send(`Cant find youtube song url \`${args[0]}\`! \nMake sure you using correct format: \`\`\`\n${prefix}play https://www.youtube.com/watch?v=dQw4w9WgXcQ \n${prefix}play https://youtu.be/dQw4w9WgXcQ\`\`\``);
 		}
 		const song = {
 			id: songInfo.videoDetails.video_id,
