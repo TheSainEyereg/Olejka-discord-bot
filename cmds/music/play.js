@@ -12,6 +12,7 @@ module.exports = {
 		const permissions = channel.permissionsFor(message.client.user);
 		if (!permissions.has('CONNECT')) return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
 		if (!permissions.has('SPEAK')) return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
+		if (!args) return message.channel.send('YouTube url mising!')
 
 		const serverQueue = message.client.queue.get(message.guild.id);
 		let songInfo
