@@ -5,7 +5,7 @@ module.exports = {
     name: 'ban',
     description: 'Bans member from server',
     arguments: '[user] (reason)',
-    async execute(message, args) {
+    execute(message, args) {
         let bUser = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
         if (!bUser) return message.channel.send('Can\'t find user!');
         let bReason = args[1];
