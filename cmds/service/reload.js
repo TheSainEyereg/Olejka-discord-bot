@@ -7,12 +7,9 @@ module.exports = {
 	arguments: '[cmdname]',
 	execute(message, args) {
 		const commandName = args[0].toLowerCase();
-		const command = message.client.commands.get(commandName)
-			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-		if (!command) {
-			return message.channel.send(`There is no command with name or \`${commandName}\`!`);
-		}
+		const command = message.client.commands.get(commandName) || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+		if (message.author.id != config.creatorid) return message.channel.send(`You are not creator of this bot`)
+		if (!command) return message.channel.send(`There is no command with name or \`${commandName}\`!`);
 
 		const commandFolders = fs.readdirSync(`./${config.cmddir}`);
 		const folderName = commandFolders.find(folder => fs.readdirSync(`./${config.cmddir}/${folder}`).includes(`${commandName}.js`));
