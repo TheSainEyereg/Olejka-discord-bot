@@ -42,4 +42,6 @@ bot.on('message', message => {
 
 })
 
+bot.on('error', (err) => console.log(err))
+
 bot.login(token);
