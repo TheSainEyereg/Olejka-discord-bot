@@ -8,10 +8,14 @@ const cmds = config.cmddir
 
 const bot = new Discord.Client();
 
-bot.on("ready", _ => {
+bot.on('ready', _ => {
     bot.user.setActivity(`Prefix ${prefix} type ${prefix}help for help`);
     console.log(`${bot.user.username} started \nBot is working on ${bot.guilds.cache.size} servers!`);
 });
+
+bot.on('unhandledRejection', e => console.error(`Unhandled promise rejection error: ${e}`));
+bot.on('shardError', e => console.error(`Websocket connection error: ${e}`));
+bot.on('error', e => console.log(`Another error: ${e}`))
 
 bot.commands = new Discord.Collection();
 bot.queue = new Map() //For music
@@ -41,7 +45,5 @@ bot.on('message', message => {
 	}
 
 })
-
-bot.on('error', (err) => console.log(err))
 
 bot.login(token);
