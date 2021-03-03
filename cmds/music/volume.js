@@ -11,7 +11,7 @@ module.exports = {
 		if (toString(args[0])>100) return message.channel.send(`Volume ${args[0]} is too big (max volume is 100)`)
 		if (toString(args[0])<1) return message.channel.send(`Volume ${args[0]} is too small (min volume is 1)`)
 		[serverQueue.volume] = args;
-		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] /100 / 5);
+		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] /100);
 		return message.channel.send(`I set the volume to: **${args[0]}**`);
 	}
 };
