@@ -8,7 +8,7 @@ module.exports = {
     execute(message, args) {
         let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
         if (!kUser) return message.channel.send('Can\'t find user!');
-        let kickReason = args[1];
+        let kickReason = args.slice(1).join(' ');
         if (!message.member.hasPermission('MANAGE_MESSAGES'))
             return message.channel.send('You have no permissions to ban/kick!');
         if (kUser.hasPermission('MANAGE_MESSAGES'))

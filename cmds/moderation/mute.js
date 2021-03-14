@@ -37,8 +37,8 @@ module.exports = {
             }
     
             let mutetime = args[1];
-            let reason = args[2];
-            if (!parseInt(mutetime)) { mutetime = 'Permanent'; reason = args[1]}
+            let reason = args.slice(2).join(' ');;
+            if (!parseInt(mutetime)) { mutetime = 'Permanent'; reason = args.slice(1).join(' ');}
     
             let muteEmbed = new Discord.MessageEmbed()
                 .setDescription('~Mute~')
