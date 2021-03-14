@@ -23,5 +23,5 @@ npm i
 3. Run bot by typing `node index.js`
 
 ## Commands
-You can view command list by typing `o!help` or list the `cmds/` directory
+You can view command list by typing `o!help` or list the `cmds/` directory  
 Also you can add your own command by puting it in `cmds/` dir
