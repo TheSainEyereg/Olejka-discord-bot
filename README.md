@@ -24,4 +24,4 @@ npm i
 
 ## Commands
 You can view command list by typing `o!help` or list the `cmds/` directory  
-Also you can add your own command by puting it in `cmds/` dir
+Also you can add your own command by putting it in `cmds/` dir
