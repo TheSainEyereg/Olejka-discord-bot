@@ -9,7 +9,7 @@ module.exports = {
         let user = message.guild.member(message.mentions.users.first());
         if (!user) return message.channel.send('Can\'t find user!');
         let reason = args.slice(1).join(' ');
-        if (!message.member.hasPermission('MANAGE_MESSAGES'))
+        if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.hasPermission('ADMINISTRATOR'))
             return message.channel.send('You have no permissions to ban/kick!');
         if (user.hasPermission('MANAGE_MESSAGES'))
             return message.channel.send('That person can\'t be kicked!');

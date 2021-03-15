@@ -8,7 +8,7 @@ module.exports = {
     arguments: '[user] (duration (mins)) (reason)',
     async execute(message, args) {
         try {
-            if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.hasPermission('MANAGE_MESSAGES'))
+            if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.hasPermission('ADMINISTRATOR'))
                 return message.channel.send('You do not have permissions to use this command');
     
             let user = message.guild.member(message.mentions.users.first());
