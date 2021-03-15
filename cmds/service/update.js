@@ -15,22 +15,15 @@ module.exports = {
             message.channel.send(`Update found. Reloading commands...`)
             
             const cmddir = fs.readdirSync(`./${config.cmddir}`);
-            //console.log(`We are in dir with [${cmddir}]`)
             for (let dir in cmddir) {
-                //console.log(`Entered the ${cmddir[dir]} dir`)
                 let files = fs.readdirSync(`./${config.cmddir}/${cmddir[dir]}`);
                 for (let file in files){
-                    //console.log(`Entered the ${files[file]} file`)
                     delete require.cache[require.resolve(`../${cmddir[dir]}/${files[file]}`)];
-                    //console.log(`Required search the ${files[file]} file`)
-            
+
                     try {
                         const newCommand = require(`../${cmddir[dir]}/${files[file]}`);
-                        //console.log(`Required the ${files[file]} file`)
                         message.client.commands.set(newCommand.name, newCommand);
-                        //console.log(`${files[file]} was reloaded!`);
                     } catch (error) {
-                        //console.log(`There was an error while reloading ${file}`);
                         return message.channel.send(`Error in ${files[file]} reload: \`${error.message}\``)
                     }
                 }
