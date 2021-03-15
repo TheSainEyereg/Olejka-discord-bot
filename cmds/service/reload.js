@@ -11,13 +11,13 @@ module.exports = {
 		if (message.author.id != config.creatorid) return message.channel.send(`You are not creator of this bot`)
 		if (!command) return message.channel.send(`There is no command with name or \`${commandName}\`!`);
 
-		const commandFolders = fs.readdirSync(`./${config.cmddir}`);
-		const folderName = commandFolders.find(folder => fs.readdirSync(`./${config.cmddir}/${folder}`).includes(`${commandName}.js`));
+		const cmddir = fs.readdirSync(`./${config.cmddir}`);
+		const dir = cmddir.find(folder => fs.readdirSync(`./${config.cmddir}/${folder}`).includes(`${commandName}.js`));
 
-		delete require.cache[require.resolve(`../${folderName}/${command.name}.js`)];
+		delete require.cache[require.resolve(`../${dir}/${command.name}.js`)];
 
 		try {
-			const newCommand = require(`../${folderName}/${command.name}.js`);
+			const newCommand = require(`../${dir}/${command.name}.js`);
 			message.client.commands.set(newCommand.name, newCommand);
 			message.channel.send(`Command \`${command.name}\` was reloaded!`);
 		} catch (error) {
