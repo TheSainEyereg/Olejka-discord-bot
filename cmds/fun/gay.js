@@ -7,7 +7,7 @@ module.exports = {
 	arguments: '(user)',
 	async execute(message, args) {
 		try {
-			let user = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
+			let user = message.guild.member(message.mentions.users.first());
 			if (!user) return message.channel.send('User is not provided or not found')
 	
 			const canvas = Canvas.createCanvas(256, 256);

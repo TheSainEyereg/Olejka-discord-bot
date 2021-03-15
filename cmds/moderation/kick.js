@@ -6,26 +6,26 @@ module.exports = {
     description: 'Kicks member from server',
     arguments: '[user] (reason)',
     execute(message, args) {
-        let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.fetch(args[0]));
-        if (!kUser) return message.channel.send('Can\'t find user!');
-        let kickReason = args.slice(1).join(' ');
+        let user = message.guild.member(message.mentions.users.first());
+        if (!user) return message.channel.send('Can\'t find user!');
+        let reason = args.slice(1).join(' ');
         if (!message.member.hasPermission('MANAGE_MESSAGES'))
             return message.channel.send('You have no permissions to ban/kick!');
-        if (kUser.hasPermission('MANAGE_MESSAGES'))
+        if (user.hasPermission('MANAGE_MESSAGES'))
             return message.channel.send('That person can\'t be kicked!');
 
         let kickEmbed = new Discord.MessageEmbed()
             .setDescription('~Kick~')
             .setColor('#f0fa32')
-            .addField('Kicked User', `${kUser} with ID ${kUser.id}`)
+            .addField('Kicked User', `${user} with ID ${user.id}`)
             .addField('Kicked By', `<@${message.author.id}> with ID ${message.author.id}`)
             .addField('Kicked In', `${message.channel}`)
             .addField('Tiime', `${message.createdAt}`)
-            .addField('Reason', kickReason);
+            .addField('Reason', reason);
 
         let kickChannel = message.guild.channels.cache.find(c => c.name === logs);
         if (kickChannel) kickChannel.send(kickEmbed);
 
-        message.guild.member(kUser).kick(kickReason);
+        message.guild.member(user).kick(reason);
     },
 };
