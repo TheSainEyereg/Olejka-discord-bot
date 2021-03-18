@@ -17,7 +17,9 @@ npm i
     "prefix": "o!",
     "cmddir": "cmds",
     "cooldown": 5,
-    "logs": "bot-logs"
+    "logs": "bot-logs",
+    "creatorid": "YOUR_DISCORD_ID",
+    "SCClient": "SOUNDCLOUD_API_KEY"
 }
 ```
 3. Run bot by typing `node index.js`
