@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Repeat given word',
 	arguments: '[word to say]',
 	execute(message, args) {
-		if (!args[0]) {message.channel.send('No args provided'); return}
-        message.channel.send(args.join(' '));        
+		if (!args[0]) return message.channel.send('Nothing to say')
+        message.channel.send(args.join(' ').replace(/@/g,''))
 	}
 };
