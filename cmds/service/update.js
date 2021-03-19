@@ -28,7 +28,7 @@ module.exports = {
                     }
                 }
             }
-            message.channel.send(`Successfully reloaded all commands.`)
+            message.channel.send(`Successfully reloaded all commands!`)
         });
 	}
 };
