@@ -8,7 +8,7 @@ module.exports = {
 	execute(message, args) {
 		if (message.author.id != config.creatorid) return message.channel.send(`You are not creator of this bot`)
 		if (!args) return message.channel.send('Nothing to reload!')
-		const toReload = args[0].toLowerCase()
+		const toReload = args[0]
 		const cmddir = fs.readdirSync(`./${config.cmddir}`)
 
 		if (toReload == 'all') {

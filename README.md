@@ -19,7 +19,9 @@ npm i
     "cooldown": 5,
     "logs": "bot-logs",
     "creatorid": "YOUR_DISCORD_ID",
-    "SCClient": "SOUNDCLOUD_API_KEY"
+    "YTClient": "YOUTUBE_API_KEY",
+    "SCClient": "SOUNDCLOUD_API_KEY",
+    "SPClient": ["SPOTIFY_APP_ID", "SPOTIFY_APP_SECRET"]
 }
 ```
 3. Run bot by typing `node index.js`
