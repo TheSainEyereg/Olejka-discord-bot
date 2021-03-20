@@ -48,7 +48,7 @@ module.exports = {
 					if (!songInfo) return message.channel.send('Looks like i was unable to find the song on SoundCloud', message.channel)
 					song = {
 						id: songInfo.permalink,
-						title: songInfo.title,
+						title: `${songInfo.title} (${songInfo.user.username})`,
 						url: songInfo.permalink_url,
 						img: songInfo.artwork_url,
 						ago: songInfo.last_modified,
