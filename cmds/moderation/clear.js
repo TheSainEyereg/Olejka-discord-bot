@@ -3,7 +3,7 @@ module.exports = {
     description: 'Clears messages count',
 	arguments: '[count]',
     execute(message, args) {
-        if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.hasPermission('ADMINISTRATOR')) return mess.channel.send('You have no permission to remove messages');
+        if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You have no permission to remove messages');
         if (!args[0]) return message.channel.send('No amount given')
         const amount = parseInt(args[0])+1 //For command message
         if (isNaN(amount)) return message.channel.send('That is not a number -_-')
