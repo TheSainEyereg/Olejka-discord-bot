@@ -3,14 +3,14 @@
 
 ## Instruction
 To run this bot yourself:
-
-1. Clone and install dependencies
+1. Install NodeJS 14 or higher (LTS 14.16.1 is recommended)
+2. Clone and install dependencies
 ```
 git clone https://github.com/TheSainEyereg/Olejka-discord-bot.git
 cd Olejka-discord-bot
 npm i
 ```
-2. Create `config.json` file with this lines: 
+3. Create `config.json` file with this lines: 
 ```
 {
     "token": "YOUR_BOT_TOKEN",
@@ -24,7 +24,7 @@ npm i
     "SPClient": ["SPOTIFY_APP_ID", "SPOTIFY_APP_SECRET"]
 }
 ```
-3. Run bot by typing `node index.js`
+4. Run bot by typing `node index.js`
 
 ## Commands
 You can view command list by typing `o!help` or list the `cmds/` directory  
