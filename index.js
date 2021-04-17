@@ -42,6 +42,7 @@ bot.on('message', message => {
     const command = args.shift().toLowerCase()
 
     if (!bot.commands.has(command)) return message.channel.send(`No command found\nType ${prefix}help for help`)
+	if (args.join('').length > 1000) return message.channel.send(`Too much symbols for command (max is 1000)`)
 	try {
 		bot.commands.get(command).execute(message, args)
 	} catch (error) {
