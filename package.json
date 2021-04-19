@@ -4,7 +4,7 @@
   "description": "My own discord bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "Olejka",
     "Test"
   ],
-  "author": "https://olejka.pw/",
+  "author": "https://olejka.ru/",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/TheSainEyereg/olejka-discord-bot/issues"

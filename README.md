@@ -24,7 +24,7 @@ npm i
     "SPClient": ["SPOTIFY_APP_ID", "SPOTIFY_APP_SECRET"]
 }
 ```
-4. Run bot by typing `node index.js`
+4. Run bot by typing `npm start` or `node index.js`
 
 ## Commands
 You can view command list by typing `o!help` or list the `cmds/` directory  
