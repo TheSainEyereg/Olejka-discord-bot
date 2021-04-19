@@ -3,6 +3,6 @@ module.exports = {
 	description: 'Sends github repo',
 	arguments: '',
 	execute(message) {
-		message.channel.send('https://github.com/TheSainEyereg/Olejka-discord-bot');
+		message.channel.send(require('../../package.json').repository.url.slice(4).split('.git'));
 	},
 };
