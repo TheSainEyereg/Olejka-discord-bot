@@ -22,7 +22,7 @@ const svcfgCreate = _ => {
 		servers[guilds[i]] = svdefault
 	}
 	fs.writeFile('servers.json', JSON.stringify(servers, null, '\t'), 'utf8', _ => {return})
-	process.stdout.write(`No servers config found, creating one...OK\nFound ${guilds.length} guilds.`)
+	process.stdout.write(`No servers config found, creating one...OK\nFound ${guilds.length} guilds.\n`)
 }
 
 bot.on('unhandledRejection', e => console.error(`Unhandled promise rejection error: ${e}`))
