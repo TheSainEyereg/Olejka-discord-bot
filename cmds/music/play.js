@@ -103,13 +103,14 @@ module.exports = {
 				//console.log(serverQueue.songs);
 				return message.channel.send(`**${song.title}** has been added to the queue!`)
 			}
-	
+			
 			const queueConstruct = {
+				serverid: message.guild.id,
 				textChannel: message.channel,
 				voiceChannel: channel,
 				connection: null,
 				songs: [],
-				volume: 75,
+				volume: null,
 				playing: true
 			}
 			message.client.queue.set(message.guild.id, queueConstruct)
@@ -128,13 +129,13 @@ module.exports = {
 				try {
 					if (song.url.includes('soundcloud.com')) {
 						try {
-							stream = await scdl.downloadFormat(song.url, scdl.FORMATS.OPUS, config.SCClient);
+							stream = await scdl.downloadFormat(song.url, scdl.FORMATS.OPUS, config.SCClient)
 						} catch (error) {
-							stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.SCClient);
+							stream = await scdl.downloadFormat(song.url, scdl.FORMATS.MP3, config.SCClient)
 							streamType = 'unknown'
 						}
 					} else if (song.url.includes('youtube.com')) {
-						stream = await ytdl(song.url, { quality: 'highestaudio', highWaterMark: 1 << 25, type: 'opus' });
+						stream = await ytdl(song.url, { quality: 'highestaudio', highWaterMark: 1 << 25, type: 'opus' })
 						stream.on('error', e => {
 							if (e) {
 								if (queue) {
@@ -171,10 +172,13 @@ module.exports = {
 					}
 					play(queue.songs[0])
 				})
-	
+				
+				try {
+					queue.volume = require('../../servers.json')[queue.serverid].volume
+				} catch (e) {console.log(e); queue.volume = 75}
 				dispatcher.setVolumeLogarithmic(queue.volume / 100)
 				message.channel.send(`Started playing **${song.title}**! \n\`Rquired by ${song.req.tag}\``)
-			};
+			}
 	
 			try {
 				const connection = await channel.join()
@@ -190,4 +194,4 @@ module.exports = {
 			message.channel.send(`Async error occured!\n\`\`\`${e}\`\`\``)
 		}
 	}
-};
+}

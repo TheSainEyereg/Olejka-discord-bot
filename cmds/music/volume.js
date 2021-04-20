@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 module.exports = {
 	name: 'volume',
 	description: 'Volume command.',
@@ -15,7 +17,15 @@ module.exports = {
 		if (parseInt(args[0])>1000 && args[1]=='overdrive') return message.channel.send('Max overdrive volume is 1000')
 		if (args[1]=='overdrive') message.channel.send(`Prepare your eardrums :smiling_imp:`)
 		[serverQueue.volume] = args
+		serverQueue.volume = args[0]
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] /100)
+		if (args[1] != 'overdrive') {
+			try {
+				let servers = require('../../servers.json')
+				servers[message.guild.id].volume = parseInt(args[0])
+				fs.writeFile('servers.json', JSON.stringify(servers, null, '\t'), 'utf8', _ => {return})
+			} catch (e) {console.log(e)}
+		}
 		return message.channel.send(`I set the volume to: **${args[0]}**`)
 	}
 }
