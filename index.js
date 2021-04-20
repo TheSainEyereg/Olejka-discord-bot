@@ -15,15 +15,14 @@ const svdefault = {
 }
 const bot = new Discord.Client()
 const svcfgCreate = _ => {
-	process.stdout.write('No servers congig found, creating one...\r')
+	process.stdout.write(`No servers config found, creating one...\r`)
 	const guilds = bot.guilds.cache.map(guild => guild.id);
-	console.log(`Found ${guilds.length} guilds`)
 	let servers = {}
 	for (let i in guilds) {
 		servers[guilds[i]] = svdefault
 	}
 	fs.writeFile('servers.json', JSON.stringify(servers, null, '\t'), 'utf8', _ => {return})
-	process.stdout.write('No servers congig found, creating one...OK\n')
+	process.stdout.write(`No servers config found, creating one...OK\nFound ${guilds.length} guilds.`)
 }
 
 bot.on('unhandledRejection', e => console.error(`Unhandled promise rejection error: ${e}`))
