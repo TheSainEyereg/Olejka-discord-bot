@@ -8,10 +8,7 @@ module.exports = {
     async execute(message, args) {
         try {
             if (!message.member.hasPermission('MUTE_MEMBERS') || !message.member.hasPermission('ADMINISTRATOR')) {
-                let mods = []
-                try {    
-                    mods = require('../../servers.json')[message.guild.id].moders
-                } catch (e) {console.log(e)}
+                const mods = require('../../servers.json')[message.guild.id].moders
                 if (!mods.includes(message.author.id)) return message.channel.send('You do not have permissions to use this command')
             }
             let user = message.guild.member(message.mentions.users.first())

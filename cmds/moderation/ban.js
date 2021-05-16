@@ -6,10 +6,7 @@ module.exports = {
     arguments: '[user] (reason)',
     execute(message, args) {
         if (!message.member.hasPermission('BAN_MEMBERS') || !message.member.hasPermission('ADMINISTRATOR')) {
-            let mods = []
-            try {    
-                mods = require('../../servers.json')[message.guild.id].moders
-            } catch (e) {console.log(e)}
+            const mods = require('../../servers.json')[message.guild.id].moders
             if (!mods.includes(message.author.id)) return message.channel.send('You have no permissions to ban!')
         }
         let user = message.guild.member(message.mentions.users.first())
