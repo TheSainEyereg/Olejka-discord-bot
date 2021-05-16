@@ -35,7 +35,7 @@ bot.on('disconnect', _ => console.log('Looks like connection was lost, I will re
 bot.on('reconnecting', _ => console.log('Im reconnecting now...'))
 
 bot.on('ready', _ => {
-    bot.user.setActivity(`Prefix ${prefix} type ${prefix}help for help`)
+    bot.user.setActivity(`Default prefix is ${prefix}`)
 	console.log('Successfully connected to API!')
 	try {require('./servers.json')} catch (e) {svcfgCreate()}
     console.log(`${bot.user.username} started \nBot is working on ${bot.guilds.cache.size} servers!`)
