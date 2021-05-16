@@ -1,6 +1,8 @@
 const Discord = require("discord.js")
 const fs = require('fs')
 
+const bot = new Discord.Client()
+
 const config = require("./config.json")
 if (!config) return console.log('No config.json found! Please create it!')
 const token = config.token
@@ -13,10 +15,9 @@ const svdefault = {
 	moders: [],
 	badwords: []
 }
-const bot = new Discord.Client()
 const svcfgCreate = _ => {
 	process.stdout.write(`No servers config found, creating one...\r`)
-	const guilds = bot.guilds.cache.map(guild => guild.id);
+	const guilds = bot.guilds.cache.map(guild => guild.id)
 	let servers = {}
 	for (let i in guilds) {
 		servers[guilds[i]] = svdefault
@@ -26,7 +27,7 @@ const svcfgCreate = _ => {
 }
 
 bot.on('unhandledRejection', e => console.error(`Unhandled promise rejection error: ${e}`))
-bot.on('shardError', e => console.error(`Websocket connection error: ${e}`));
+bot.on('shardError', e => console.error(`Websocket connection error: ${e}`))
 bot.on('error', e => console.error(`Another error: ${e}`))
 bot.on('warn', e => console.warn(`Warning: ${e}`))
 
@@ -36,18 +37,15 @@ bot.on('reconnecting', _ => console.log('Im reconnecting now...'))
 bot.on('ready', _ => {
     bot.user.setActivity(`Prefix ${prefix} type ${prefix}help for help`)
 	console.log('Successfully connected to API!')
-	try {
-		require('./servers.json')
-	} catch (e) {
-		svcfgCreate()
-	}
+	try {require('./servers.json')} catch (e) {svcfgCreate()}
     console.log(`${bot.user.username} started \nBot is working on ${bot.guilds.cache.size} servers!`)
-});
+})
 
 bot.on("guildCreate", guild => {
-    console.log(`Joined ${guild.name}`);
+    console.log(`Joined ${guild.name}`)
 	process.stdout.write('Trying to create cfg...\r')
 	try {
+		delete require.cache[require.resolve('./servers.json')];
 		let servers = require('./servers.json')
 		if (servers[guild.id]) return process.stdout.write('Trying to create server cfg...ALREADY\n')
 		servers[guild.id] = svdefault
@@ -72,10 +70,16 @@ for (const folder of commandFolder) {
 }
 
 bot.on('message', message => {
-	let svprefix = prefix;
 	try {
-		svprefix = require('./servers.json')[message.guild.id].prefix
-	} catch (e) {svcfgCreate()}
+		delete require.cache[require.resolve('./servers.json')];
+		require('./servers.json')
+		} catch (e) {
+			svcfgCreate()
+			message.channel.send('Looks like your server config wasn\'t found so we created one, please execute command again!')
+			return
+		}
+
+	const svprefix = require('./servers.json')[message.guild.id].prefix
 	if (message.mentions.has(bot.user) || (message.content.startsWith(prefix) && !message.content.startsWith(svprefix))) return message.channel.send(`Prefix for this server is "${svprefix}"`)
     if (!message.content.startsWith(svprefix) || message.author.bot || message.channel.type === 'dm') return
 
@@ -94,4 +98,4 @@ bot.on('message', message => {
 
 })
 
-bot.login(token);
+bot.login(token)
