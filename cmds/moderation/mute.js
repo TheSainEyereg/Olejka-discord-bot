@@ -56,12 +56,24 @@ module.exports = {
                 let muteChannel = message.guild.channels.cache.find(c => c.name === logs)
                 if (muteChannel) muteChannel.send(muteEmbed)
             } catch (e) {console.error(e)}
+
+            let DMEmbed = new Discord.MessageEmbed()
+                .setDescription('You has been muted!')
+                .setColor('#fab132')
+                .addField('Mute reason:', reason)
+                .addField('Muted For', `${mutetime} min`)
+                .addField('Muted By',`<@${message.author.id}> with ID ${message.author.id}` )
     
             await user.roles.add(muterole.id)
             if (parseInt(mutetime)) {
                 message.channel.send(`<@${user.id}> has been muted for ${mutetime} min`)
                 setTimeout(() => {
-                    user.roles.remove(muterole);
+                    try {
+                        user.roles.remove(muterole);
+                    } catch(e) {
+                        console.error(e)
+                        return
+                    }
                     message.channel.send(`<@${user.id}> has been unmuted!`)
                 }, ms(mutetime)*1000*60);
             } else {

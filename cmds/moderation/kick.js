@@ -25,11 +25,18 @@ module.exports = {
             .addField('Tiime', `${message.createdAt}`)
             .addField('Reason', reason)
 
-            try {
-                let logs = require('../../servers.json')[message.guild.id].logs
-                let kickChannel = message.guild.channels.cache.find(c => c.name === logs)
-                if (kickChannel) kickChannel.send(kickEmbed)
-            } catch (e) {console.error(e)}
+        try {
+            let logs = require('../../servers.json')[message.guild.id].logs
+            let kickChannel = message.guild.channels.cache.find(c => c.name === logs)
+            if (kickChannel) kickChannel.send(kickEmbed)
+        } catch (e) {console.error(e)}
+
+        let DMEmbed = new Discord.MessageEmbed()
+            .setDescription('You has been kicked!')
+            .setColor('#f0fa32')
+            .addField('Kick reason:', reason)
+            .addField('Kicked By',`<@${message.author.id}> with ID ${message.author.id}` )
+            
         message.guild.member(user).kick(reason)
     },
 };
