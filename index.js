@@ -70,18 +70,21 @@ for (const folder of commandFolder) {
 }
 
 bot.on('message', message => {
+	if (message.channel.type === 'dm' && !message.author.bot) return message.channel.send('I\'m mot working with DM! Please use me on server!')
+
 	try {
 		delete require.cache[require.resolve('./servers.json')];
 		require('./servers.json')
-		} catch (e) {
-			svcfgCreate()
-			message.channel.send('Looks like your server config wasn\'t found so we created one, please execute command again!')
-			return
-		}
-
+	} catch (e) {
+		svcfgCreate()
+		message.channel.send('Looks like your server config wasn\'t found so we created one, please execute command again!')
+		return
+	}
+	if (!message.guild) return //I dont f**king know why 73 line return doesn't working
 	const svprefix = require('./servers.json')[message.guild.id].prefix
+	
 	if (message.mentions.has(bot.user) || (message.content.startsWith(prefix) && !message.content.startsWith(svprefix))) return message.channel.send(`Prefix for this server is "${svprefix}"`)
-    if (!message.content.startsWith(svprefix) || message.author.bot || message.channel.type === 'dm') return
+    if (!message.content.startsWith(svprefix) || message.author.bot) return
 
     const body = message.content.slice(svprefix.length)
     const args = body.split(' ')
