@@ -10,8 +10,6 @@ module.exports = {
 	description: 'Play command.',
 	arguments: '[url]',
 	async execute(message, args) {
-		spdl.setCredentials(config.SPClient[0], config.SPClient[1])
-
 		try{
 			const { channel } = message.member.voice
 			if (!channel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!')
