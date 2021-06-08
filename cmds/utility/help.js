@@ -18,8 +18,12 @@ module.exports = {
 		}
 		category = args[0]
 		out.push(`Commands list of category ${category}`)
-		const cmds = fs.readdirSync(`./${config.cmddir}/${category}`)
-		for (let file in cmds) out.push(`	**${servers[message.guild.id].prefix}${require(`../${category}/${cmds[file]}`).name} ${require(`../${category}/${cmds[file]}`).arguments}** — ${require(`../${category}/${cmds[file]}`).description}`)
-		message.channel.send(out)
+		try {
+			const cmds = fs.readdirSync(`./${config.cmddir}/${category}`)
+			for (let file in cmds) out.push(`	**${servers[message.guild.id].prefix}${require(`../${category}/${cmds[file]}`).name} ${require(`../${category}/${cmds[file]}`).arguments}** — ${require(`../${category}/${cmds[file]}`).description}`)
+			message.channel.send(out)
+		} catch (e) {
+			message.channel.send(`Category "${category}" not found!`)
+		}
 	}
 };
