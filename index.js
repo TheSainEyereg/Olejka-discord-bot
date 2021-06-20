@@ -88,7 +88,8 @@ bot.on('message', message => {
 
     const body = message.content.slice(svprefix.length)
     const args = body.split(' ')
-    const command = args.shift().toLowerCase()
+    const command = args.shift().toLowerCase().replace(/\ /g,'')
+	if (command == '') return //fuck
 
     if (!bot.commands.has(command)) return message.channel.send(`No command found\nType ${svprefix}help for help`)
 	if (args.join('').length > 1000) return message.channel.send(`Too much symbols for command (max is 1000)`)
