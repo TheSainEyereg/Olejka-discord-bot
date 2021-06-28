@@ -20,12 +20,15 @@ module.exports = {
                     limit: amount,
                 })
                 .then((messages) => {
-                    message.channel.bulkDelete(messages);
-                    message.channel.send(`Deleted ${amount-1} messages!`) //For command message
-                    .then(msg => {
-                        msg.delete({timeout: 3000})
-                    })
-                    .catch(/*e => {messgae.channel.send('Error when deleting message')}*/)
+                    message.channel.bulkDelete(messages)
+                        .then(_ => {
+                            message.channel.send(`Deleted ${amount-1} messages!`) //For command message
+                            .then(msg => {
+                                msg.delete({timeout: 3000})
+                            })
+                            .catch(/*e => {messgae.channel.send('Error when deleting message')}*/)
+                        })
+                        .catch(e => {return message.channel.send(`Oh no: \`${e}\``)});
                 });
         }
         delete_messages()
