@@ -29,13 +29,15 @@ const svcfgCreate = _ => {
 	process.stdout.write(`No servers config found, creating one...OK\nFound ${guilds.length} guilds.\n`)
 }
 
-bot.on("unhandledRejection", e => console.error(`Unhandled promise rejection error: ${e}`))
+process.on("unhandledRejection", e => console.error(`Unhandled promise rejection error: ${e}`))
+
 bot.on("shardError", e => console.error(`Websocket connection error: ${e}`))
 bot.on("error", e => console.error(`Another error: ${e}`))
 bot.on("warn", e => console.warn(`Warning: ${e}`))
 
 bot.on("disconnect", _ => console.log("Looks like connection was lost, I will reconnect immediately when coonection appears."))
 bot.on("reconnecting", _ => console.log("Im reconnecting now..."))
+bot.on("resume", _ => console.log("Reconnected!"))
 
 bot.on("ready", _ => {
     bot.user.setActivity(`Default prefix is ${prefix}`)
