@@ -22,7 +22,10 @@ module.exports = {
 		try {
 			out.push(`Commands list of category \`${category}\`:`)
 			const cmds = fs.readdirSync(`./${config.cmddir}/${category}`)
-			for (let file in cmds) out.push(`	**${servers[message.guild.id].prefix}${require(`../${category}/${cmds[file]}`).name} ${require(`../${category}/${cmds[file]}`).arguments}** — ${require(`../${category}/${cmds[file]}`).description}`)
+			for (let file in cmds) {
+				const cmd = require(`../${category}/${cmds[file]}`)
+				out.push(`	**${servers[message.guild.id].prefix}${cmd.name}** \`${cmd.arguments}\` — ${cmd.description}`)
+			}
 			message.channel.send(out)
 		} catch (e) {
 			message.channel.send(`Category \`${category}\` not found!`)
