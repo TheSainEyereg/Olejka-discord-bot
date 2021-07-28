@@ -1,3 +1,19 @@
+# ⚠This repo is now archived and no longer maintained
+This was my first discord bot that was used on some of my servers. But now I'm closing this.  
+
+**Several reasons:**  
+* Bad code structure.  
+* Bad files structure.  
+* bad style.
+* Unstable/Unoptimised functionality.  
+* Many pasted code.  
+
+---
+
+### I'm going to rewrite some of this functions in my new bot project called [ZeroBot](https://github.com/TheSainEyereg/ZeroBot-Discord)  
+When this is completed, it will become my main project of this type that I will develop.
+
+---
 # Olejka discord bot
  My first discord bot
 
