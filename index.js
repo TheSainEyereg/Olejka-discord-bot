@@ -2,6 +2,9 @@ const Discord = require("discord.js")
 const fs = require("fs")
 
 const bot = new Discord.Client()
+bot.commands = new Discord.Collection()
+bot.cooldowns = new Discord.Collection();
+bot.queue = new Map() //For music
 
 const config = require("./config.json")
 if (!config) return console.log("No config.json found! Please create it!")
@@ -57,11 +60,7 @@ bot.on("guildCreate", guild => {
 	}
 })
 
-bot.commands = new Discord.Collection()
-bot.queue = new Map() //For music
-const commandFolder = fs.readdirSync(`./${cmds}`)
-
-for (const folder of commandFolder) {
+for (const folder of fs.readdirSync(`./${cmds}`)) {
 	const commandFile = fs.readdirSync(`./${cmds}/${folder}`).filter(file => file.endsWith(".js"))
 	for (const file of commandFile) {
 		const command = require(`./${cmds}/${folder}/${file}`)
@@ -91,6 +90,21 @@ bot.on("message", message => {
     const args = body.split(" ");
     const command = args.shift().toLowerCase().replace(/\ /g,"");
 	if (!command) return;
+
+	const { cooldowns } = bot;
+	if (!cooldowns.has(command.name)) {
+		cooldowns.set(command.name, new Discord.Collection());
+	}
+
+	const now = Date.now();
+	const timestamps = cooldowns.get(command.name);
+	const amount = config.cooldown * 1000;
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + amount;
+		if (now < expirationTime) return
+	}
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), amount);
 
     if (!bot.commands.has(command)) return message.channel.send(`No command found\nType ${svprefix}help for help`);
 	if (args.join("").length > 1000) return message.channel.send(`Too much symbols for command (max is 1000)`);
