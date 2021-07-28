@@ -24,7 +24,7 @@ module.exports = {
 			const cmds = fs.readdirSync(`./${config.cmddir}/${category}`)
 			for (let file in cmds) {
 				const cmd = require(`../${category}/${cmds[file]}`)
-				out.push(`	**${servers[message.guild.id].prefix}${cmd.name}** \`${cmd.arguments}\` — ${cmd.description}`)
+				out.push(`	**${servers[message.guild.id].prefix}${cmd.name}** ${cmd.arguments ? `\`${cmd.arguments}\``: ""} — ${cmd.description}`)
 			}
 			message.channel.send(out)
 		} catch (e) {
