@@ -1,5 +1,5 @@
 # Olejka discord bot
- Discord bot for personal usage
+ My first discord bot
 
 ## Instruction
 To run this bot yourself:
