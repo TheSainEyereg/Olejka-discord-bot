@@ -7,8 +7,8 @@ module.exports = {
 	execute(message, args) {
 		if (!args[0]) return message.channel.send("Nothing to convert");
         axios.get(`https://artii.herokuapp.com/make?text=${args.join(" ")}`)
-        .then(response => {
-            message.channel.send(`\`\`\`${response.data}\`\`\``);
+        .then(res => {
+            message.channel.send(`\`\`\`${res.data}\`\`\``);
         })
         .catch(e => {
             return message.channel.send(`Error in ascii converting: \`\`\`${e}\`\`\``);
