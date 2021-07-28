@@ -10,7 +10,7 @@ module.exports = {
 			const user = message.guild.member(message.mentions.users.first()) || message.guild.member(message.client. users.cache.find(user => user.username == args[0])) || message.guild.member(message.author)
 			if (!user) return message.channel.send("Can't find user :/");
 	
-			const canvas = Canvas.createCanvas(256, 256);
+			const canvas = Canvas.createCanvas(512, 512);
 			const ctx = canvas.getContext("2d");
 	
 			const avatar = await Canvas.loadImage(user.user.avatarURL({ format: "jpg", size: 512 }));
