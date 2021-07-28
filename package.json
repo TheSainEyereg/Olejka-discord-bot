@@ -1,38 +1,15 @@
 {
-  "name": "olejka-discord-bot",
-  "version": "1.0.0",
-  "description": "My own discord bot",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TheSainEyereg/olejka-discord-bot.git"
-  },
-  "keywords": [
-    "Discord",
-    "Bot",
-    "Olejka",
-    "Test"
-  ],
-  "author": "https://olejka.ru/",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TheSainEyereg/olejka-discord-bot/issues"
-  },
-  "homepage": "https://github.com/TheSainEyereg/olejka-discord-bot#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.4.0",
-    "canvas": "^2.6.1",
-    "discord.js": "^12.5.1",
-    "ffmpeg-static": "^4.2.7",
+    "@discordjs/opus": "^0.5.3",
+    "canvas": "^2.8.0",
+    "discord.js": "^12.5.3",
+    "ffmpeg-static": "^4.4.0",
     "ms": "^2.1.3",
-    "soundcloud-downloader": "^0.2.4",
+    "soundcloud-downloader": "^1.0.0",
     "spdl-core": "^2.0.2",
     "spotify-web-api-node": "^5.0.2",
-    "yt-search": "^2.7.4",
-    "ytdl-core": "^4.8.3",
-    "ytdl-core-discord": "^1.2.5"
+    "yt-search": "^2.10.0",
+    "ytdl-core": "^4.9.0",
+    "ytdl-core-discord": "^1.3.1"
   }
 }

@@ -3,7 +3,7 @@
 
 ## Instruction
 To run this bot yourself:
-1. Install NodeJS 14 or higher (LTS 14.16.1 is recommended)
+1. Install NodeJS 15 or higher (LTS 16.5.0 is recommended)
 2. Clone and install dependencies
 ```
 git clone https://github.com/TheSainEyereg/Olejka-discord-bot.git
@@ -16,8 +16,9 @@ npm i
     "token": "YOUR_BOT_TOKEN",
     "prefix": "o!",
     "cmddir": "cmds",
-    "cooldown": 5,
     "logs": "bot-logs",
+    "cooldown": 5,
+    "updateInterval": 300,
     "creatorid": "YOUR_DISCORD_ID",
     "YTClient": "YOUTUBE_API_KEY",
     "SCClient": "SOUNDCLOUD_API_KEY",
