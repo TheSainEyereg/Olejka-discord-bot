@@ -8,6 +8,8 @@ This was my first discord bot that was used on some of my servers. But now I'm c
 * Unstable/Unoptimised functionality.  
 * Many pasted code.  
 
+I will continue fixing critical errors or shortcomings of this bot, but not for a long time.
+
 ---
 
 ### I'm going to rewrite some of this functions in my new bot project called [ZeroBot](https://github.com/TheSainEyereg/ZeroBot-Discord)  
