@@ -6,7 +6,7 @@ module.exports = {
 	description: "Shows random 10s coub from  given community",
 	arguments: "[community] (order: likes_count, views_count, newest_popular)",
 	execute(message, args) {
-		const communities = ["anime", "animals-pets", "blogging", "standup-jokes", "mashup", "movies", "gaming", "cartoons", "art", "live-pictures", "music", "news", "sports", "science-technology", "food-kitchen", "celebrity", "nature-travel", "fashion", "dance", "cars", "memes", /*"nsfw",*/ "featured", "coub-of-the-day"];
+		const communities = ["anime", "animals-pets", "blogging", "standup-jokes", "mashup", "movies", "gaming", "cartoons", "art", "live-pictures", "music", "news", "sports", "science-technology", "food-kitchen", "celebrity", "nature-travel", "fashion", "dance", "cars", "memes", /*"nsfw", "featured",*/ "coub-of-the-day"];
         const orders = ["likes_count", "views_count", "newest_popular"];
         if (!communities.includes(args[0]) || !args[0]) return message.channel.send(`Available communities: \`${communities.join(", ")}\``);
         order = orders.includes(args[1]);
@@ -24,7 +24,7 @@ module.exports = {
                 const link = `https://coub.com/view/${res.data.permalink}`;
                 if (!url || !link) return message.channel.send(`Error in getting video!`);
                 const video = new Discord.MessageAttachment(url, "coub.mp4");
-                message.channel.send(`\`${link}\``,video);
+                message.channel.send(`<${link}>`,video);
             })
             .catch(e => {
                 return message.channel.send(`Error in fetching coub info: \`\`\`${e}\`\`\``);
