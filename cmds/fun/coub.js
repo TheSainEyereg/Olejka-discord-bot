@@ -6,7 +6,7 @@ module.exports = {
 	description: "Shows random 10s coub from  given community",
 	arguments: "[community] (order: likes_count, views_count, newest_popular)",
 	execute(message, args) {
-		const communities = ["anime", "animals-pets", "blogging", "standup-jokes", "mashup", "movies", "gaming", "cartoons", "art", "live-pictures", "music", "news", "sports", "science-technology", "food-kitchen", "celebrity", "nature-travel", "fashion", "dance", "cars", "memes", /*"nsfw", "featured",*/ "coub-of-the-day"];
+		const communities = ["anime", "animals-pets", "blogging", "standup-jokes", "mashup", "movies", "gaming", "cartoons", "art", "live-pictures", "music", "news", "sports", "science-technology", "food-kitchen", "celebrity", "nature-travel", "fashion", "dance", "cars", "memes", /*"nsfw"*/];
         const orders = ["likes_count", "views_count", "newest_popular"];
         if (!communities.includes(args[0]) || !args[0]) return message.channel.send(`Available communities: \`${communities.join(", ")}\``);
         order = orders.includes(args[1]);
