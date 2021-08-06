@@ -45,6 +45,15 @@ npm i
 ```
 4. Run bot by typing `npm start` or `node index.js`
 
+---
+If you have any troubles on Linux machines with Canvas or another lib, try installing these dependencies:
+```sh
+sudo apt-get update 
+sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+npm i #or npm i canvas
+```
+---
+
 ## Commands
 You can view command list by typing `o!help` or list the `cmds/` directory  
 Also you can add your own command by putting it in `cmds/` dir
